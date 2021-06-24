@@ -1,6 +1,10 @@
 
 .progressContainer{
+    margin-bottom: 40px;
 
+}
+.line{
+    clear: both;
 }
 .progress {
     width: 100%;
@@ -23,7 +27,8 @@
     margin-bottom: 20px;
     color: #DBDBDB;
 }
-.progress .done .name {
+.progress .done .name,
+.progress .active .name{
     color: #5125DB;
 }
 .progress .step {
@@ -34,10 +39,13 @@
     height: 20px;
     display: inline-block;
 }
-.progress .done .step{
+.progress .done .step,
+.progress .active .step{
     border: 10px solid #5125DB;
 }
-
+*, *:before, *:after{
+    box-sizing: content-box!important;
+}
 .progress .step:before,
 .progress .step:after {
     content: "";
@@ -46,7 +54,7 @@
     height: 10px;
     width: 50%;
     position: absolute;
-    bottom: 17px;
+    bottom: 19px;
     z-index: -1;
 }
 .progress .step:before {
@@ -55,7 +63,6 @@
 .progress .step:after {
     right: 0;
 }
-
 .progress li:first-of-type .step:before,
 .progress li:last-of-type .step:after {
     display: none;
@@ -63,8 +70,101 @@
 
 
 .progress .done .step:before,
-.progress .done .step:after {
+.progress .done .step:after,
+.progress .active .step:before {
     background: #5125DB;
 }
 
 
+
+/*.progressContainer{*/
+
+/*}*/
+/*.progress {*/
+/*    width: 100%;*/
+/*    list-style: none;*/
+/*    list-style-image: none;*/
+/*    margin: 20px 0 20px 0;*/
+/*    padding: 0;*/
+/*}*/
+
+/*.progress li {*/
+/*    float: left;*/
+/*    text-align: center;*/
+/*    position: relative;*/
+/*}*/
+
+/*.progress .name {*/
+/*    display: block;*/
+/*    vertical-align: bottom;*/
+/*    text-align: center;*/
+/*    margin-bottom: 1em;*/
+/*    color: black;*/
+/*    opacity: 0.3;*/
+/*}*/
+
+/*.progress .step {*/
+/*    color: black;*/
+/*    border: 3px solid silver;*/
+/*    background-color: silver;*/
+/*    border-radius: 50%;*/
+/*    line-height: 1.2;*/
+/*    width: 1.2em;*/
+/*    height: 1.2em;*/
+/*    display: inline-block;*/
+/*    z-index: 0;*/
+/*}*/
+
+/*.progress .step span {*/
+/*    opacity: 0.3;*/
+/*}*/
+
+/*.progress .active .name,*/
+/*.progress .active .step span {*/
+/*    opacity: 1;*/
+/*}*/
+
+/*.progress .step:before {*/
+/*    content: "";*/
+/*    display: block;*/
+/*    background-color: silver;*/
+/*    height: 0.4em;*/
+/*    width: 50%;*/
+/*    position: absolute;*/
+/*    bottom: 0.6em;*/
+/*    left: 0;*/
+/*    z-index: -1;*/
+/*}*/
+
+/*.progress .step:after {*/
+/*    content: "";*/
+/*    display: block;*/
+/*    background-color: silver;*/
+/*    height: 0.4em;*/
+/*    width: 50%;*/
+/*    position: absolute;*/
+/*    bottom: 0.6em;*/
+/*    right: 0;*/
+/*    z-index: -1;*/
+/*}*/
+
+/*.progress li:first-of-type .step:before {*/
+/*    display: none;*/
+/*}*/
+
+/*.progress li:last-of-type .step:after {*/
+/*    display: none;*/
+/*}*/
+
+/*.progress .done .step,*/
+/*.progress .done .step:before,*/
+/*.progress .done .step:after,*/
+/*.progress .active .step,*/
+/*.progress .active .step:before {*/
+/*    background-color: yellowgreen;*/
+/*}*/
+
+/*.progress .done .step,*/
+/*.progress .active .step {*/
+/*    border: 3px solid yellowgreen;*/
+/*}*/
