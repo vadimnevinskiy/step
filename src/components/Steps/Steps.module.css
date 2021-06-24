@@ -1,0 +1,70 @@
+
+.progressContainer{
+
+}
+.progress {
+    width: 100%;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.progress li {
+    float: left;
+    text-align: center;
+    position: relative;
+}
+
+.progress .name {
+    display: block;
+    font-size: 25px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 20px;
+    color: #DBDBDB;
+}
+.progress .done .name {
+    color: #5125DB;
+}
+.progress .step {
+    border: 10px solid #DBDBDB;
+    background: #ffffff;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    display: inline-block;
+}
+.progress .done .step{
+    border: 10px solid #5125DB;
+}
+
+.progress .step:before,
+.progress .step:after {
+    content: "";
+    display: block;
+    background: #DBDBDB;
+    height: 10px;
+    width: 50%;
+    position: absolute;
+    bottom: 17px;
+    z-index: -1;
+}
+.progress .step:before {
+    left: 0;
+}
+.progress .step:after {
+    right: 0;
+}
+
+.progress li:first-of-type .step:before,
+.progress li:last-of-type .step:after {
+    display: none;
+}
+
+
+.progress .done .step:before,
+.progress .done .step:after {
+    background: #5125DB;
+}
+
+
