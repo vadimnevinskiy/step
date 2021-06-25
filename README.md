@@ -17,9 +17,3 @@ Make a step progress component.
 - Use stateless components where possible
 - Demostrate the understanding of React components' life cycle
 - Enhancing the component with simple animations is a nice to have
-
-### 📦 Deliverables
-
-- Please send the repo URL or a zip file to dmtr.mikheev@gmail.com
-- Provide an easy setup `npm install` and `npm start`
-- Tell us how much time you spent on the task
