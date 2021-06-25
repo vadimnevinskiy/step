@@ -1,42 +1,82 @@
 import React, {useCallback, useEffect, useState} from 'react'
 import classes from './Steps.module.css'
-import AddStepForm from "../AddStepForm/AddStepForm";
+import AddStepForm from '../AddStepForm/AddStepForm'
 import classNames from 'classnames'
+import ActionButtons from '../ActionButtons/ActionButtons'
+
+
+
+
+
 const Steps = () => {
     const maximumLength = 5
     const minimumLength = 2
     const cx = classNames.bind(classes);
+
+
     const initialSteps = [
         {id: 0, title: 'Design', state: ''},
         {id: 1, title: 'Build', state: ''}
     ]
+
+
     const [stepsList, setSteps] = useState(initialSteps)
     const [stepsWidth, setStepsWidth] = useState(0)
     const [activeStep, setActiveStep] = useState(0)
 
+    // Alert info messages
+    const alertText = (text) => {
+        window.M.toast({html: text})
+    }
 
 
+    // Calculation width for each steps
     useEffect(() => {
-        const width = 100 / stepsList.length;
-        setStepsWidth(width)
+        const widthForEachSteps = 100 / stepsList.length;
+        setStepsWidth(widthForEachSteps)
     }, [stepsList])
 
-    useEffect(() => {
-        let internalSteps = []
-        for(let i = 0; i < stepsList.length; i++) {
-            let currentStep = stepsList[i]
-            if(currentStep.id === activeStep){
-                setActiveStep(stepsList[i].id)
-                internalSteps.push({id: stepsList[i].id, title: stepsList[i].title, state: 'active'})
-            } else {
-                internalSteps.push({id: stepsList[i].id, title: stepsList[i].title, state: ''})
+
+
+    //Adding classes for step list
+    const setClassesForEachSteps = (stepIndex) => {
+        let temporaryArray = []
+        if(stepIndex >= 0) {
+            for (let i = 0; i < stepsList.length; i++) {
+                if (stepsList[i].id < stepIndex) {
+                    temporaryArray.push({...stepsList[i], state: 'done'})
+                } else if (stepsList[i].id == stepIndex) {
+                    temporaryArray.push({...stepsList[i], state: 'active'})
+                    setActiveStep(stepsList[i].id)
+                } else {
+                    temporaryArray.push({...stepsList[i], state: ''})
+                }
             }
+            setSteps(temporaryArray)
         }
-        setSteps(internalSteps)
+    }
+
+
+
+
+    //Adding classes for step list
+    useEffect(() => {
+        setClassesForEachSteps(activeStep)
     }, [stepsList.length])
 
 
 
+    // Go to Next-Preview step
+    const goToStep = useCallback((stepIndex) => {
+        setClassesForEachSteps(stepIndex)
+    }, [stepsList])
+
+
+
+
+
+
+    // Adding new steps
     const addStep = (newStepTitle) => {
         if(newStepTitle && stepsList.length < maximumLength){
             let newStep = {
@@ -46,27 +86,33 @@ const Steps = () => {
             }
             setSteps([...stepsList, newStep])
         } else if (stepsList.length >= maximumLength) {
-            window.M.toast({html: `Maximum length of steps ${maximumLength}`})
+            alertText(`Maximum length of steps ${maximumLength}`)
         } else if (!newStepTitle) {
-            window.M.toast({html: `Empty field title`})
+            alertText(`Empty field title`)
         }
     }
+
+    //Remove last step
     const removeLastStep = () => {
         if(stepsList.length > minimumLength) {
             stepsList.pop()
             setSteps([...stepsList])
         } else if (stepsList.length <= minimumLength){
-            window.M.toast({html: `Minimum length of steps ${minimumLength}`})
+            alertText(`Minimum length of steps ${minimumLength}`)
         }
     }
 
-    const nextStep = useCallback((nextStep) => {
-        alert('nextStep ' + nextStep)
-    }, [])
 
-    const previousStep  = useCallback((previousStep) => {
-        alert('previousStep ' + previousStep)
-    }, [])
+
+
+
+
+
+
+
+
+
+
 
     return (
         <>
@@ -86,25 +132,15 @@ const Steps = () => {
                                     key={`${index}_${step.id}`}
                                     style={{width: `${stepsWidth}%`}}>
                                     <span className={classes.name}>{step.title} {step.id}</span>
-                                    <span className={classes.step}></span>
+                                    <span className={classes.step}>&nbsp;</span>
                                 </li>
                             )
                         })
                     }
                 </ul>
-                <div className={classes.line}></div>
+                <div className={classes.line}>&nbsp;</div>
             </div>
-            <div className={'container'}>
-                <button className={'btn waves-effect waves-light'} type="button" onClick={() => previousStep(activeStep - 1)}>
-                    <i className="material-icons left">navigate_before</i>
-                    Previous step {activeStep - 1}
-                </button>
-
-                <button className={'btn waves-effect waves-light'} type="button" onClick={() => nextStep(activeStep + 1)}>
-                    <i className="material-icons right">navigate_next</i>
-                    Next step {activeStep + 1}
-                </button>
-            </div>
+            <ActionButtons activeStep={activeStep} goToStep={goToStep} />
         </>
     )
 }
