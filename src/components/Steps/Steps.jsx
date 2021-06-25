@@ -1,8 +1,8 @@
 import React, {useCallback, useEffect, useState} from 'react'
 import classes from './Steps.module.css'
 import AddStepForm from '../AddStepForm/AddStepForm'
-import classNames from 'classnames'
 import ActionButtons from '../ActionButtons/ActionButtons'
+import StepItem from './StepItem/StepItem'
 
 
 
@@ -11,18 +11,19 @@ import ActionButtons from '../ActionButtons/ActionButtons'
 const Steps = () => {
     const maximumLength = 5
     const minimumLength = 2
-    const cx = classNames.bind(classes);
 
 
+    // Default steps
     const initialSteps = [
         {id: 0, title: 'Design', state: ''},
-        {id: 1, title: 'Build', state: ''}
+        {id: 1, title: 'Build', state: ''},
+        {id: 2, title: 'Launch', state: ''}
     ]
 
 
-    const [stepsList, setSteps] = useState(initialSteps)
-    const [stepsWidth, setStepsWidth] = useState(0)
-    const [activeStep, setActiveStep] = useState(0)
+    const [stepsList, setSteps] = useState(initialSteps) // Set default steps
+    const [stepsWidth, setStepsWidth] = useState(0) // Step width in percent
+    const [activeStep, setActiveStep] = useState(1) // Id of active step
 
     // Alert info messages
     const alertText = (text) => {
@@ -107,36 +108,12 @@ const Steps = () => {
 
 
 
-
-
-
-
-
-
-
     return (
         <>
             <AddStepForm addStep={addStep} removeLastStep={removeLastStep} />
             <div className={classes.progressContainer}>
                 <ul className={classes.progress}>
-                    {
-                        stepsList.length > 0 &&
-                        stepsList.map((step, index) => {
-                            let className = cx({
-                                [classes.done]: step.state === 'done',
-                                [classes.active]: step.state === 'active'
-                            });
-                            return (
-                                <li
-                                    className={className}
-                                    key={`${index}_${step.id}`}
-                                    style={{width: `${stepsWidth}%`}}>
-                                    <span className={classes.name}>{step.title} {step.id}</span>
-                                    <span className={classes.step}>&nbsp;</span>
-                                </li>
-                            )
-                        })
-                    }
+                    <StepItem stepsList={stepsList} stepsWidth={stepsWidth} />
                 </ul>
                 <div className={classes.line}>&nbsp;</div>
             </div>

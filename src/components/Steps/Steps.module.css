@@ -12,68 +12,9 @@
     margin: 0;
     padding: 0;
 }
-
 .progress li {
     float: left;
     text-align: center;
     position: relative;
 }
 
-.progress .name {
-    display: block;
-    font-size: 25px;
-    font-weight: bold;
-    text-align: center;
-    margin-bottom: 20px;
-    color: #DBDBDB;
-    transition: all 0.4s;
-}
-.progress .done .name,
-.progress .active .name{
-    color: #5125DB;
-}
-.progress .step {
-    border: 10px solid #DBDBDB;
-    background: #ffffff;
-    border-radius: 50%;
-    width: 20px;
-    height: 20px;
-    display: inline-block;
-    transition: all 0.4s;
-}
-.progress .done .step,
-.progress .active .step{
-    border: 10px solid #5125DB;
-}
-*, *:before, *:after{
-    box-sizing: content-box!important;
-}
-.progress .step:before,
-.progress .step:after {
-    content: "";
-    display: block;
-    background: #DBDBDB;
-    height: 10px;
-    width: 50%;
-    position: absolute;
-    bottom: 16px;
-    z-index: -1;
-    transition: all 0.4s;
-}
-.progress .step:before {
-    left: 0;
-}
-.progress .step:after {
-    right: 0;
-}
-.progress li:first-of-type .step:before,
-.progress li:last-of-type .step:after {
-    display: none;
-}
-
-
-.progress .done .step:before,
-.progress .done .step:after,
-.progress .active .step:before {
-    background: #5125DB;
-}

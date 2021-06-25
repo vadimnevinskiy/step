@@ -1,0 +1,57 @@
+.name {
+    display: block;
+    font-size: 25px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 20px;
+    color: #DBDBDB;
+    transition: all 0.4s;
+}
+.done .name,
+.active .name{
+    color: #5125DB;
+}
+.step {
+    border: 10px solid #DBDBDB;
+    background: #ffffff;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    display: inline-block;
+    transition: all 0.4s;
+}
+.done .step,
+.active .step{
+    border: 10px solid #5125DB;
+}
+*, *:before, *:after{
+    box-sizing: content-box!important;
+}
+.step:before,
+.step:after {
+    content: "";
+    display: block;
+    background: #DBDBDB;
+    height: 10px;
+    width: 50%;
+    position: absolute;
+    bottom: 16px;
+    z-index: -1;
+    transition: all 0.4s;
+}
+.step:before {
+    left: 0;
+}
+.step:after {
+    right: 0;
+}
+li:first-of-type .step:before,
+li:last-of-type .step:after {
+    display: none;
+}
+
+.done .step:before,
+.done .step:after,
+.active .step:before {
+    background: #5125DB;
+}
